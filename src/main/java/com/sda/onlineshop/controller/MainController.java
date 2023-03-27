@@ -7,12 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -31,10 +30,10 @@ public class MainController {
     }
 
     @PostMapping("/addProduct")
-    public String addProductPost(@ModelAttribute ProductDto productDto) {
+    public String addProductPost(@ModelAttribute ProductDto productDto, @RequestParam("productImg") MultipartFile productImg) {
         System.out.println(productDto);
         log.info("apelat add product");
-        productService.create(productDto);
+        productService.create(productDto,productImg);
         return "redirect:/addProduct";
     }
 
@@ -50,6 +49,19 @@ public class MainController {
     @GetMapping("/product/{id}")
     public String viewProductGet (Model model, @PathVariable(value = "id") String id){
         System.out.println("I clicked the product with id: "+ id);
+        Optional<ProductDto> optionalProductDto= productService.getProductDtoById(id);
+        if (optionalProductDto.isEmpty()){
+            return "error";
+        }
+        model.addAttribute("productDto",optionalProductDto.get());
         return "viewProduct";
+    }
+    @GetMapping("/register")
+    public String registerGet(){
+        return "register";
+    }
+    @GetMapping("/login")
+    public String loginGet(){
+        return "login";
     }
 }

@@ -24,7 +24,7 @@
             <div th:each="productDto:${productDtoList}" class="col-md-6 col-lg-4 col-xl-3">
                 <div class="card text-center card-product">
                     <div class="card-product__img">
-                        <img class="card-img" src="img/product/product1.png" alt="">
+                        <img class="card-img" th:src="${'data:image/png; base64, '+productDto.img}" alt="">
                         <ul class="card-product__imgOverlay">
                             <li><button><i class="ti-search"></i></button></li>
                             <li><button><i class="ti-shopping-cart"></i></button></li>
@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <p th:text="${productDto.category}"></p>
                         <h4 class="card-product__title"><a th:href="@{/product/{x}(x = ${productDto.id})}" th:text="${productDto.name}"></a></h4>
-                        <p class="card-product__price" th:text="${productDto.price + '$'}"></p>
+                        <p class="card-product__price" th:text="${productDto.price + ' $'}"></p>
                     </div>
                 </div>
             </div>
