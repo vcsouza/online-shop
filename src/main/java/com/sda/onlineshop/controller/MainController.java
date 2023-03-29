@@ -2,12 +2,14 @@ package com.sda.onlineshop.controller;
 
 
 import com.sda.onlineshop.dto.ProductDto;
+import com.sda.onlineshop.dto.ProductQuantityDto;
 import com.sda.onlineshop.dto.UserAccountDto;
 import com.sda.onlineshop.service.ProductService;
 import com.sda.onlineshop.service.UserAccountService;
 import com.sda.onlineshop.validator.UserAccountValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,6 +57,7 @@ public class MainController {
 
     }
     @GetMapping("/product/{id}")
+
     public String viewProductGet (Model model, @PathVariable(value = "id") String id){
         //System.out.println("I clicked the product with id: "+ id);
         Optional<ProductDto> optionalProductDto= productService.getProductDtoById(id);
@@ -62,7 +65,18 @@ public class MainController {
             return "error";
         }
         model.addAttribute("productDto",optionalProductDto.get());
+        ProductQuantityDto productQuantityDto = new ProductQuantityDto();
+        model.addAttribute("productQuantityDto",productQuantityDto);
         return "viewProduct";
+    }
+    @PostMapping("/product/{id}")
+    public String addToCartPost(@ModelAttribute ProductQuantityDto productQuantityDto,
+                                @PathVariable(value = "id") String id, Authentication authentication){
+//        System.out.println(productQuantityDto);
+//        System.out.println("I've added to the cart: " +id);
+        System.out.println(authentication.getName());
+        return "redirect:/product/"+id;
+
     }
     @GetMapping("/register")
     public String registerGet(Model model){
@@ -83,4 +97,6 @@ public class MainController {
     public String loginGet(){
         return "login";
     }
+
+
 }
