@@ -14,7 +14,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/register").permitAll();
+            auth.requestMatchers("/register").permitAll(); //permit all user to enter /register
+            auth.requestMatchers("/home").hasAnyRole("SELLER","BUYER"); //you need to have a role to access home
+            auth.requestMatchers("/addProduct").hasRole("SELLER");
+            auth.requestMatchers("/product/*").hasAnyRole("SELLER","BUYER");
+            auth.requestMatchers("/cart").hasRole("BUYER");
         }).httpBasic();
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
