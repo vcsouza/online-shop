@@ -22,7 +22,12 @@ import java.util.Optional;
 @Controller
 @Slf4j
 public class MainController {
+    //wait for the website requests and send them on the correct way
+    //basically a door-man
+    //every method on Controller needs to bea  String
 
+    //autowired -> to use a class
+    //object is the instance of a class
     @Autowired
     private ProductService productService;
     @Autowired
@@ -30,6 +35,7 @@ public class MainController {
     @Autowired
     private UserAccountValidator userAccountValidator;
 
+    //send the dto to comeback with data
     @GetMapping("/addProduct")
     public String addProductGet(Model model) {
         ProductDto productDto = new ProductDto();
@@ -38,7 +44,7 @@ public class MainController {
 
         return "addProduct";
     }
-
+    //sends data to DB
     @PostMapping("/addProduct")
     public String addProductPost(@ModelAttribute ProductDto productDto, @RequestParam("productImg") MultipartFile productImg) {
         //System.out.println(productDto);

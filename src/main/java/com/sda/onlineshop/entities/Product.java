@@ -11,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
+    //this is the object that goes to the database
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
