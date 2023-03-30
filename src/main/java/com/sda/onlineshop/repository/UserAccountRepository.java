@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface UserAccountRepository  extends JpaRepository<UserAccount, Long> {
+    //CRUD - Create, Read, Update, Delete
     public Optional<UserAccount> findByEmail(String email);
 
 

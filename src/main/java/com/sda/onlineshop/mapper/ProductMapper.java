@@ -11,6 +11,7 @@ import java.io.IOException;
 @Component
 @Builder
 public class ProductMapper {
+    //return a product where the parameter is a Dto coming with info from HTML
     public Product map(ProductDto productDto, MultipartFile productImg){
         return Product.builder()
                 .price(Double.parseDouble(productDto.getPrice()))
@@ -20,7 +21,7 @@ public class ProductMapper {
                 .unitsInStock(Integer.valueOf(productDto.getUnitsInStock()))
                 .img(convertToByte(productImg))
                 .build();
-
+    //it's a constructor
     }
     public ProductDto map (Product product){
         return ProductDto.builder()
