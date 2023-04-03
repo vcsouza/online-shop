@@ -4,6 +4,8 @@ package com.sda.onlineshop.controller;
 import com.sda.onlineshop.dto.ProductDto;
 import com.sda.onlineshop.dto.ProductQuantityDto;
 import com.sda.onlineshop.dto.UserAccountDto;
+import com.sda.onlineshop.entities.Cart;
+import com.sda.onlineshop.service.CartService;
 import com.sda.onlineshop.service.ProductService;
 import com.sda.onlineshop.service.UserAccountService;
 import com.sda.onlineshop.validator.UserAccountValidator;
@@ -34,6 +36,8 @@ public class MainController {
     private UserAccountService userAccountService;
     @Autowired
     private UserAccountValidator userAccountValidator;
+    @Autowired
+    private CartService cartService;
 
     //send the dto to comeback with data
     @GetMapping("/addProduct")
@@ -73,6 +77,7 @@ public class MainController {
         model.addAttribute("productDto",optionalProductDto.get());
         ProductQuantityDto productQuantityDto = new ProductQuantityDto();
         model.addAttribute("productQuantityDto",productQuantityDto);
+
         return "viewProduct";
     }
     @PostMapping("/product/{id}")
@@ -81,6 +86,7 @@ public class MainController {
 //        System.out.println(productQuantityDto);
 //        System.out.println("I've added to the cart: " +id);
         System.out.println(authentication.getName());
+        cartService.addToCart(id,productQuantityDto, authentication.getName());
         return "redirect:/product/"+id;
 
     }
@@ -104,5 +110,9 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/checkout")
+    public String checkoutGet() {
+        return "checkout";
+    }
 
 }

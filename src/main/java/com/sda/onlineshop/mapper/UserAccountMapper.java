@@ -1,6 +1,7 @@
 package com.sda.onlineshop.mapper;
 
 import com.sda.onlineshop.dto.UserAccountDto;
+import com.sda.onlineshop.entities.Cart;
 import com.sda.onlineshop.entities.UserAccount;
 import com.sda.onlineshop.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class UserAccountMapper {
                 .name(userAccountDto.getName())
                 .password(bCryptPasswordEncoder.encode(userAccountDto.getPassword()))
                 .userRole(UserRole.valueOf(userAccountDto.getUserRole()))
+                .cart(new Cart())
                 .build();
     }
 }

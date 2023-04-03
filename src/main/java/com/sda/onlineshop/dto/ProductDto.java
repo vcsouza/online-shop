@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-    //middleman between hmtl and java
+    //middleman between html and java
     //data transfer object
     //send the fields empty to HTML and returns them populated (collecting data from HTML)
 public class ProductDto {
