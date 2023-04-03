@@ -19,6 +19,7 @@ public class SecurityConfig {
             auth.requestMatchers("/addProduct").hasRole("SELLER");
             auth.requestMatchers("/product/*").hasAnyRole("SELLER","BUYER");
             auth.requestMatchers("/cart").hasRole("BUYER");
+            auth.requestMatchers("/checkout").hasRole("BUYER");
         }).httpBasic();
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()

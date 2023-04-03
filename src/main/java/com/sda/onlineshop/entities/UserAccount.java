@@ -14,7 +14,7 @@ import lombok.*;
 public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Nonnull
     private String name;
     @Nonnull
@@ -25,4 +25,8 @@ public class UserAccount {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
+    @OneToOne(mappedBy = "userAccount",cascade = CascadeType.ALL)
+    @JoinColumn
+    private Cart cart;
 }

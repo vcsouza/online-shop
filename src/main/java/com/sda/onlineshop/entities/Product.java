@@ -4,6 +4,8 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -14,7 +16,7 @@ public class Product {
     //this is the object that goes to the database
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Nonnull
     private String name;
     private String description;
@@ -27,5 +29,8 @@ public class Product {
     @Lob
     @Column(columnDefinition = "blob")
     private byte[] img;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartEntry> cartEntryList;
 
 }

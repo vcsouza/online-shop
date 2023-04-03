@@ -16,5 +16,6 @@ public class UserAccountService {
     public void registerUser(UserAccountDto userAccountDto){
         UserAccount userAccount = userAccountMapper.map(userAccountDto);
         userAccountRepository.save(userAccount);
+
     }
 }
