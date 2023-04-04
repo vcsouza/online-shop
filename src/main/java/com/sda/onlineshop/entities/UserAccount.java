@@ -26,7 +26,7 @@ public class UserAccount {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToOne(mappedBy = "userAccount",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Cart cart;
 }
