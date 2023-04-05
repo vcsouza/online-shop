@@ -5,6 +5,8 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -25,8 +27,9 @@ public class UserAccount {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Cart cart;
+    @OneToMany(mappedBy = "userAccount")
+    private List<Order> orderList;
 }

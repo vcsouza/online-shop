@@ -33,7 +33,7 @@
                         <td>
                             <div class="media">
                                 <div class="d-flex">
-                                    <img th:src="${'data:image/png; base64, '+cartEntryDto.image}" alt="">
+                                    <img th:src="${'data:image/png; base64, '+cartEntryDto.image}" style='height: 120px; width: 120px; object-fit: contain' alt="">
                                 </div>
                                 <div class="media-body">
                                     <p th:text="${cartEntryDto.name}"></p>
@@ -104,9 +104,12 @@
                         <td>
                         </td>
                         <td>
+
                             <div class="checkout_btn_inner d-flex align-items-center">
                                 <a class="gray_btn" href="/home">Continue Shopping</a>
-                                <a class="primary-btn ml-2" href="#">Place order</a>
+                                <form action="/confirmation" method="post">
+                                    <button type="submit" value="submit" class="button button-register w-100">Place Order</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
