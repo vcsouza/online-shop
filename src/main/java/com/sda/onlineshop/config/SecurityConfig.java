@@ -20,13 +20,14 @@ public class SecurityConfig {
             auth.requestMatchers("/product/*").hasAnyRole("SELLER","BUYER");
             auth.requestMatchers("/cart").hasRole("BUYER");
             auth.requestMatchers("/checkout").hasRole("BUYER");
+            auth.requestMatchers("/confirmation").hasRole("BUYER");
         }).httpBasic();
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .and()
                 .cors().disable().authorizeHttpRequests()
                 .and()
-                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home");
+                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home",true);
 
         return httpSecurity.build();
     }

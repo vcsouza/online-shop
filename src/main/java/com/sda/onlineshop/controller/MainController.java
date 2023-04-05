@@ -4,6 +4,7 @@ package com.sda.onlineshop.controller;
 import com.sda.onlineshop.dto.*;
 import com.sda.onlineshop.entities.Cart;
 import com.sda.onlineshop.service.CartService;
+import com.sda.onlineshop.service.OrderService;
 import com.sda.onlineshop.service.ProductService;
 import com.sda.onlineshop.service.UserAccountService;
 import com.sda.onlineshop.validator.UserAccountValidator;
@@ -37,6 +38,8 @@ public class MainController {
     private UserAccountValidator userAccountValidator;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private OrderService orderService;
 
     //send the dto to comeback with data
     @GetMapping("/addProduct")
@@ -134,6 +137,17 @@ public class MainController {
         CheckoutDto checkoutDto = cartService.getCheckoutDtoByUserEmail(authentication.getName());
         model.addAttribute("checkoutDto",checkoutDto);
         return "checkout";
+    }
+    @GetMapping("/confirmation")
+    public String confirmationGet(){
+        return "error";
+    }
+    @PostMapping("/confirmation")
+    public String confirmationPost(Model model, Authentication authentication){
+        orderService.placeOrder(authentication.getName());
+        CheckoutDto checkoutDto = cartService.getCheckoutDtoByUserEmail(authentication.getName());
+        model.addAttribute("checkoutDto", checkoutDto);
+        return "confirmation";
     }
 
 }
