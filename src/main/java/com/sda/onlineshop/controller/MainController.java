@@ -60,17 +60,20 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String homeGet(Model model) {
+    public String homeGet(Model model, Authentication authentication) {
 
     List<ProductDto> productDtoList = productService.getAllProductDtoList();
     model.addAttribute("productDtoList",productDtoList);
         System.out.println(productDtoList);
+
+    int cartQuantity = cartService.getQuantity(authentication.getName());
+    model.addAttribute("quantity",cartQuantity);
     return "home";
 
     }
     @GetMapping("/product/{id}")
 
-    public String viewProductGet (Model model, @PathVariable(value = "id") String id){
+    public String viewProductGet (Model model,Authentication authentication, @PathVariable(value = "id") String id){
         //System.out.println("I clicked the product with id: "+ id);
         Optional<ProductDto> optionalProductDto= productService.getProductDtoById(id);
         if (optionalProductDto.isEmpty()){
@@ -79,6 +82,9 @@ public class MainController {
         model.addAttribute("productDto",optionalProductDto.get());
         ProductQuantityDto productQuantityDto = new ProductQuantityDto();
         model.addAttribute("productQuantityDto",productQuantityDto);
+
+        int cartQuantity = cartService.getQuantity(authentication.getName());
+        model.addAttribute("quantity",cartQuantity);
 
         return "viewProduct";
     }

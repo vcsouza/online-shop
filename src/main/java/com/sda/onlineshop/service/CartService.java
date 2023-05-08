@@ -62,4 +62,12 @@ public class CartService {
                 .total(String.valueOf(subtotal+30))
                 .build();
     }
+    public int getQuantity (String userEmail){
+        Cart cart = cartRepository.findByUserAccountEmail(userEmail);
+        Integer quantity = 0;
+        for (CartEntry cartEntry:cart.getCartEntryList()){
+            quantity += cartEntry.getQuantity();
+        }
+        return quantity;
+    }
 }

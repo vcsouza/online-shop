@@ -12,4 +12,5 @@ public class CheckoutDto {
     private String shippingFee;
     private String total;
     private List<CartEntryDto> cartEntryDtoList;
+
 }
