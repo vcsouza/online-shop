@@ -67,7 +67,7 @@ public class MainController {
         System.out.println(productDtoList);
 
     int cartQuantity = cartService.getQuantity(authentication.getName());
-    model.addAttribute("quantity",cartQuantity);
+        model.addAttribute("quantity",cartQuantity);
     return "home";
 
     }

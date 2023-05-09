@@ -16,7 +16,7 @@
 </head>
 <body>
 <div th:insert="fragments/menu :: menu"></div>
-<section class="section-margin calc-60px">
+<section class="section-margin calc -60px">
     <div class="container">
         <div class="section-intro pb-60px">
             <h2>Available <span class="section-intro__style">Products</span></h2>
@@ -25,7 +25,7 @@
             <div th:each="productDto:${productDtoList}" class="col-md-6 col-lg-4 col-xl-3">
                 <div class="card text-center card-product">
                     <div class="card-product__img">
-                        <img class="card-img" th:src="${'data:image/png; base64, '+productDto.img}" alt="">
+                        <img class="card-img" th:src="${'data:image/png; base64, '+productDto.img}" width="325" height="250" alt="">
                         <ul class="card-product__imgOverlay">
                             <li><button><i class="ti-search"></i></button></li>
                             <li><button><i class="ti-shopping-cart"></i></button></li>
@@ -41,7 +41,9 @@
             </div>
 
         </div>
+
     </div>
+    <div th:insert="fragments/footer :: footer"></div>
 </section>
 <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
