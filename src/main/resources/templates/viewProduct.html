@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${productDto.name}"></title>
     <link rel="icon" href="img/logo.png" type="image/png">
     <link rel="stylesheet" href="/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css">
@@ -60,6 +60,7 @@
             </div>
         </div>
     </div>
+    <div th:insert="fragments/footer :: footer"></div>
 </div>
 <script src="/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="/vendors/bootstrap/bootstrap.bundle.min.js"></script>
